@@ -1,0 +1,88 @@
+﻿@model DoctorsProject.Models.DoctorDetailsViewModel
+@{
+    ViewBag.Title = "Index";
+}
+<header>
+    <style>
+        #doctorTable {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+            #doctorTable td, #doctorTable th {
+                border: 1px solid #ddd;
+                padding: 8px;
+            }
+
+            #doctorTable tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+
+            #doctorTable tr:hover {
+                background-color: #ddd;
+            }
+
+            #doctorTable th {
+                padding-top: 12px;
+                padding-bottom: 12px;
+                text-align: left;
+                background-color: #4CAF50;
+                color: white;
+            }
+    </style>
+    <script src="~/Scripts/jquery.signalR-2.4.1.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.4.1.min.js"></script>
+    <script src="signalr/hubs"></script>
+
+</header>
+<div class="jumbotron">
+    <h2>Doctor details</h2>
+    <p id="paragraph">
+        This one is for you
+    </p>
+</div>
+<div >
+    <table border="1" class="col-md-12" id="doctorTable">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Phone Number</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model.DoctorDetailsItemViewModel)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+                <td>@item.Address</td>
+                <td>@item.PhoneNumber</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $(function() {
+        var hubConnection = $.connection.myDoctorHub;
+        var connectionHub = $.connection.hub;
+        console.log(connectionHub);
+        hubConnection.client.getEvent = function (result) {
+            for (let i = 0; i < result.length; i++) {
+                $('table tbody').clear();
+                $('table tbody').append('<tr><td>' + result.DoctorDetailsItemViewModel[i].Id + '</td><td>' + result.DoctorDetailsItemViewModel[i].Name + '</td><td>' + result.DoctorDetailsItemViewModel[i].Address + '</td><td>' + result.DoctorDetailsItemViewModel[i].PhoneNumber +'</td></tr>');
+            }
+
+        };
+        connectionHub.start().done(function () {
+            hubConnection.server.getEvent();
+        }).fail(function (e) {
+            alert(e);
+        });
+    });
+</script>
+

@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @RenderSection("scripts", required: false)
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+</head>
+<body class="mini-navbar" style="padding: 0">
+    <div id="wrapper" style="overflow-x: unset;">
+        <!-- Navigation -->
+        <div id="session-nav">
+
+            @Html.Partial("_Navigation")
+        </div>
+        <!-- Page wraper -->
+        <div id="page-wrapper" class="gray-bg" style="min-height: 803px; margin: 0 0 0 55px;">
+
+            <div id="session">
+                <!-- Main view -->
+
+                <div class="header-menu pull-right dropbtn" style="padding: 10px;">
+                    <img class="img-circle" width="40" src="~/Images/mypic.jpeg" />
+                </div>
+
+                <div class="row wrapper border-bottom white-bg animated page-heading" style="background-color: #4CAF50;">
+
+                    <div class="col-md-6" style="padding-left: 35px; padding-bottom: 10px;">
+                        <h2>Welcome, Prabhat Kumar</h2>
+                    </div>
+
+                </div>
+
+                <div class="wrapper wrapper-content" style="padding: 15px;">
+                    @RenderBody()
+                    <hr />
+
+                </div>
+
+            </div>
+
+            <!-- End page wrapper-->
+        </div>
+    </div>
+    <footer class="positi">
+        <p>&copy; @DateTime.Now.Year - My Doctor Application</p>
+    </footer>
+</body>
+</html>

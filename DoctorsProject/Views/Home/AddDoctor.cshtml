@@ -1,0 +1,51 @@
+﻿@model DoctorsProject.Models.AddDoctorViewModel
+@{
+    ViewBag.Title = "AddDoctor";
+}
+
+<h2>Add Doctor</h2>
+@using (Ajax.BeginForm(MVC.Home.ActionNames.SaveDoctor, MVC.Home.Name, new AjaxOptions()
+{
+    HttpMethod = "post",
+    InsertionMode = InsertionMode.Replace,
+    OnSuccess = "OnSuccessSave",
+}))
+{
+    @Html.HiddenFor(m => m.Id)
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name, new { @class = "control-label col-md-2", style = "text-align: right" })
+        <div class="col-md-10">
+            @Html.EditorFor(m => m.Name, new { @class = "col-md-12 form-control required", style = "height: 90px; resize:vertical; border-radius: 4px" })
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+    </div>
+    <br>
+    <br>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Address, new { @class = "control-label col-md-2", style = "text-align: right" })
+        <div class="col-md-10">
+            @Html.EditorFor(m => m.Address, new { @class = "col-md-12 form-control required", style = "height: 90px; resize:vertical; border-radius: 4px" })
+            @Html.ValidationMessageFor(model => model.Address)
+        </div>
+    </div>
+    <br>
+    <div class="form-group">
+        @Html.LabelFor(m => m.PhoneNumber, new { @class = "control-label col-md-2", style = "text-align: right" })
+        <div class="col-md-10">
+            @Html.EditorFor(m => m.PhoneNumber, new { @class = "col-md-12 form-control required", style = "height: 90px; resize:vertical; border-radius: 4px" })
+            @Html.ValidationMessageFor(model => model.PhoneNumber)
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <hr />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-8">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                @Html.ActionLink("Cancel", MVC.Home.ActionNames.Index, null, new { @class = "btn btn-white" })
+            </div>
+        </div>
+
+    </div>
+}
+
