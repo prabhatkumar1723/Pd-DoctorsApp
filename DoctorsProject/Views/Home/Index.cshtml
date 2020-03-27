@@ -42,47 +42,33 @@
         This one is for you
     </p>
 </div>
-<div >
+<div>
     <table border="1" class="col-md-12" id="doctorTable">
         <thead>
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Address</th>
-            <th>Phone Number</th>
-        </tr>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Phone Number</th>
+                <th>Designation</th>
+                <th>Years Od Experience</th>
+
+            </tr>
         </thead>
         <tbody>
-        @foreach (var item in Model.DoctorDetailsItemViewModel)
-        {
-            <tr>
-                <td>@item.Id</td>
-                <td>@item.Name</td>
-                <td>@item.Address</td>
-                <td>@item.PhoneNumber</td>
-            </tr>
-        }
+            @foreach (var item in Model.DoctorDetailsItemViewModelList)
+            {
+
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                    <td>@item.Address</td>
+                    <td>@item.PhoneNumber</td>
+                    <td>@item.Designation</td>
+                    <td>@item.YearOfExperience</td>
+                </tr>
+            }
         </tbody>
     </table>
 </div>
-
-<script>
-    $(function() {
-        var hubConnection = $.connection.myDoctorHub;
-        var connectionHub = $.connection.hub;
-        console.log(connectionHub);
-        hubConnection.client.getEvent = function (result) {
-            for (let i = 0; i < result.length; i++) {
-                $('table tbody').clear();
-                $('table tbody').append('<tr><td>' + result.DoctorDetailsItemViewModel[i].Id + '</td><td>' + result.DoctorDetailsItemViewModel[i].Name + '</td><td>' + result.DoctorDetailsItemViewModel[i].Address + '</td><td>' + result.DoctorDetailsItemViewModel[i].PhoneNumber +'</td></tr>');
-            }
-
-        };
-        connectionHub.start().done(function () {
-            hubConnection.server.getEvent();
-        }).fail(function (e) {
-            alert(e);
-        });
-    });
-</script>
 

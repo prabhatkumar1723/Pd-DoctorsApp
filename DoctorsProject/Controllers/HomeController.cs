@@ -12,7 +12,7 @@ namespace DoctorsProject.Controllers
     {
         public virtual ActionResult Index()
         {
-            var vm = DoctorsDetailService.DoctorsDetail();
+            var vm = DoctorsDetailService.GetDoctorsList();
             return View(vm);
         }
 
@@ -31,7 +31,7 @@ namespace DoctorsProject.Controllers
                     addDoctorViewModel.Id = Guid.NewGuid();
                 }
 
-                var result = DoctorsDetailService.SaveDoctor(addDoctorViewModel);
+                var result = DoctorsDetailService.SaveDoctorBasicInfo(addDoctorViewModel);
                 if (result)
                 {
                     return RedirectToAction(MVC.Home.ActionNames.Index);

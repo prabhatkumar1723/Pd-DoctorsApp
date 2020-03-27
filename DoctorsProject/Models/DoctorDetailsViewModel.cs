@@ -7,6 +7,6 @@ namespace DoctorsProject.Models
 {
     public class DoctorDetailsViewModel
     {
-        public List<DoctorDetailsItemViewModel> DoctorDetailsItemViewModel { get; set; }
+        public List<DoctorDetailsItemViewModel> DoctorDetailsItemViewModelList { get; set; }
     }
 }
